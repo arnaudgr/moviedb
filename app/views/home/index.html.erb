@@ -1,0 +1,15 @@
+<h1>Currency</h1>
+
+<form action="/home" method="post">
+     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+      <input type="text" name="currency_request" />
+     
+   <button type="submit">Obtain the value</button>
+</form>
+
+<form action="/movies/search" method="post">
+     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+      <input type="text" name="movie_request" />
+     
+   <button type="submit">Obtain the film</button>
+</form>

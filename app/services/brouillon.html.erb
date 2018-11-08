@@ -1,0 +1,31 @@
+	
+  def token
+    url = URI("https://api.themoviedb.org/3/authentication/token/new?api_key=#{@api_key}")
+    http = Net::HTTP.new(url.host, url.port)
+	http.use_ssl = true
+	http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+	request = Net::HTTP::Get.new(url)
+	request.body = "{}"
+
+	response = http.request(request)
+	reponse = response.read_body
+    
+    @reponse2 = JSON.parse reponse.gsub('=>', ':')
+  	@token = @reponse2["request_token"]
+
+  end
+
+  def session
+
+	url = URI("https://api.themoviedb.org/3/authentication/session/new?api_key=%3C%3Capi_key%3E%3E")
+
+	http = Net::HTTP.new(url.host, url.port)
+	http.use_ssl = true
+	http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+	request = Net::HTTP::Post.new(url)
+	request["content-type"] = 'application/json'
+	request.body = "{\"request_token\":\"#{@token}\"}"
+
+  end
